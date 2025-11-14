@@ -1,5 +1,5 @@
 # GameHub
-
+## Khadeeja Tunkara and Austin Schnee
 ## Checklist
 
 - [ ] frequent commits to github.
