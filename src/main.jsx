@@ -3,11 +3,15 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { HomePage } from "./pages/HomePage.jsx";
+import { TicTacToePage } from "./pages/TicTacToePage.jsx"
 
 const router = createBrowserRouter([
   {
     path: "/",
-    children: [{ path: "/", element: <HomePage /> }],
+    children: [
+      { path: "/", element: <HomePage /> },
+      { path: "/game/tic-tac-toe", element: <TicTacToePage /> },
+    ],
   },
 ]);
 
