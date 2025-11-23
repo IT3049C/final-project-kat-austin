@@ -1,13 +1,10 @@
-import './App.css'
+import "../App.css";
 
-function App() {
-
+export function HomePage() {
   return (
     <>
       <h1>GameHub</h1>
       <p>Welcome to GameHub</p>
     </>
-  )
+  );
 }
-
-export default App
