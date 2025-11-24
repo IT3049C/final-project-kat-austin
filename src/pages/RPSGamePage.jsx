@@ -1,8 +1,7 @@
-import { NavLink } from "react-router-dom";
 import { GameSection } from "../components/rps-game/GameSection";
 import { HighScoresSection } from "../components/rps-game/HighScoresSection";
 import { PlayerInfoCard } from "../components/rps-game/PlayerInfoCard";
-import { loadSettings } from "../logic/settings";
+import { loadSettings } from "../logic/storage";
 
 export function RPSGamePage() {
   // Load settings directly in the component
