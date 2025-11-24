@@ -5,6 +5,7 @@ import "./index.css";
 import { HomePage } from "./pages/HomePage.jsx";
 import { RPSGamePage } from "./pages/RPSGamePage.jsx";
 import { TicTacToePage } from "./pages/TicTacToePage.jsx"
+import { WordlePage } from "./pages/WordlePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/game/rps", element: <RPSGamePage /> },
       { path: "/game/tic-tac-toe", element: <TicTacToePage /> },
+      { path: "/game/wordle", element: <WordlePage /> },
     ],
   },
 ]);
