@@ -4,7 +4,7 @@ export function PlayerInfoCard({ playerName, /*playerAvatar*/ }) {
   //console.log(playerAvatar);
   return (
     <section aria-labelledby="player-info-heading" className="card">
-      <h3 id="player-info-heading">Player Info</h3>
+      <h2 id="player-info-heading">Player Info</h2>
       <div role="status" aria-live="polite" data-testid="greeting">
         {playerName ? `Welcome ${playerName}!` : null}
       </div>
