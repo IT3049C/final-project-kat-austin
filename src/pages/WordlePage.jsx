@@ -5,15 +5,22 @@ import {
   getRandomWord,
   isWordValid,
 } from "../logic/wordle.js";
-
-const targetWord = (await getRandomWord()).toUpperCase();
-console.log(`Target word is: ${targetWord}`);
+import { useQuery } from "@tanstack/react-query";
 
 export function WordlePage() {
   const [currentAttempt, setCurrentAttempt] = useState(0);
   const [currentPosition, setCurrentPosition] = useState(0);
   const [grid, setGrid] = useState(setupGrid());
   const [resultText, setResultText] = useState("");
+
+  const {
+    data: targetWord,
+    error,
+    isLoading,
+  } = useQuery({
+    queryKey: ["randomWord"],
+    queryFn: async () => (await getRandomWord()).toUpperCase(),
+  });
 
   useEffect(() => {
     document.addEventListener("keydown", handleKeydown);
@@ -139,7 +146,7 @@ export function WordlePage() {
   function handleKeydown(e) {
     if (isLetter(e.key)) {
       console.log(`letter: ${e.key}`);
-      
+
       addLetterToGrid(e.key);
     } else if (e.key === "Backspace") {
       removeLetterFromGrid();
@@ -147,6 +154,22 @@ export function WordlePage() {
       submitGuess();
     }
   }
+
+  if (isLoading) {
+    return (
+      <main>
+        <p>Loading...</p>
+      </main>
+    );
+  } else if (error) {
+    return (
+      <main>
+        <p>Error getting a target word.</p>
+      </main>
+    );
+  }
+
+  console.log(`Target word: ${targetWord}`);
 
   return (
     <main>
