@@ -4,19 +4,31 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #213547;
-  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* Light Theming */
+  color: #213547;
+  background-color: #ffffff;
+  
+  /* For Wordle */
+  --correct: #00cc66;
+  --misplaced: #ffcc00;
+  --incorrect: #ff4d4d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     color: rgba(255, 255, 255, 0.87);
     background-color: #242424;
+
+    /* For Wordle */
+    --correct: #538d4e;
+    --misplaced: #b59f3b;
+    --incorrect: #3a3a3c;
   }
   a:hover {
     color: #535bf2;
@@ -65,4 +77,41 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Wordle */
+.letter {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #3a3a3c;
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#wordle-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 60px);
+  column-gap: 8px;
+}
+
+#game {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.correct {
+  background-color: var(--correct);
+}
+
+.misplaced {
+  background-color: var(--misplaced);
+}
+
+.incorrect {
+  background-color: var(--incorrect);
 }

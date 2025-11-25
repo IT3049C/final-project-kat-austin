@@ -5,7 +5,6 @@ import {
   getRandomWord,
   isWordValid,
 } from "../logic/wordle.js";
-import "./WordlePage.css";
 
 const targetWord = (await getRandomWord()).toUpperCase();
 console.log(`Target word is: ${targetWord}`);
