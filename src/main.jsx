@@ -4,8 +4,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 import { HomePage } from "./pages/HomePage.jsx";
 import { RPSGamePage } from "./pages/RPSGamePage.jsx";
-import { TicTacToePage } from "./pages/TicTacToePage.jsx"
+import { TicTacToePage } from "./pages/TicTacToePage.jsx";
 import { WordlePage } from "./pages/WordlePage.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
 );
