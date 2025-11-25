@@ -149,9 +149,9 @@ export function WordlePage() {
   }
 
   return (
-    <>
+    <main>
       <header>
-        <h1>Wordle</h1>
+        <h2>Wordle</h2>
       </header>
       <div id="game">
         <p id="game-result">{resultText}</p>
@@ -170,7 +170,7 @@ export function WordlePage() {
           ))}
         </div>
       </div>
-    </>
+    </main>
   );
 }
 
