@@ -1,6 +1,6 @@
 import { GameHeader } from "./GameHeader";
 import { HistorySection } from "./HistorySection";
-import { beats, decideWinner, getCpuMove, nextScore } from "../../logic/rps-game";
+import { beats, decideWinner, getCpuMove, nextScore } from "../../logic/rpsGame";
 import { MoveButton } from "./MoveButton";
 import { ScoreBoard } from "./ScoreBoard";
 import { useState } from "react";
