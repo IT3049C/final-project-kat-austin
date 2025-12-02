@@ -1,8 +1,8 @@
-export const beats = {
+export const beats = Object.freeze({
   rock: "scissors",
   paper: "rock",
   scissors: "paper",
-};
+});
 
 export function decideWinner(player, cpu) {
   if (player === cpu) return "tie";
