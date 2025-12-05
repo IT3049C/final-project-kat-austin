@@ -173,3 +173,17 @@ MARK: Tic-tac-toe
 .game-info {
   margin-left: 20px;
 }
+
+/**
+MARK: Memory Cards
+*/
+#memory-card-container {
+  display: grid;
+}
+
+.memory-card {
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
