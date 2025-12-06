@@ -1,6 +1,6 @@
 import HangmanGame from '../components/hangman/HangmanGame.jsx';
 
-export default function HangmanPage() {
+export function HangmanPage() {
   return (
     <div className="hangman-page">
       <HangmanGame />
