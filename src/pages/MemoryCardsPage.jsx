@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { MemoryCard } from "../components/memory-cards/MemoryCard";
-
-const COLUMNS = 6;
-const ROWS = 3;
+import { config } from "../logic/memoryCards"
 
 export function MemoryCardsPage() {
   const [grid, setGrid] = useState(setUpGrid());
@@ -23,7 +21,7 @@ export function MemoryCardsPage() {
       <main>
         <div
           id="memory-card-container"
-          style={{ gridTemplateColumns: `repeat(${COLUMNS}, auto)` }}
+          style={{ gridTemplateColumns: `repeat(${config.columns}, auto)` }}
         >
           {grid.map((card) => (
             <MemoryCard
@@ -41,10 +39,17 @@ export function MemoryCardsPage() {
 function setUpGrid() {
   const grid = [];
 
-  for (let row = 0; row < ROWS; row++) {
-    for (let col = 0; col < COLUMNS; col++) {
+  for (let row = 0; row < config.rows; row++) {
+    for (let col = 0; col < config.columns; col++) {
       grid.push({ key: grid.length, icon: "😀", revealed: false });
     }
   }
   return grid;
+}
+
+/**
+ * @url https://www.tutorialspoint.com/how-to-select-a-random-element-from-array-in-javascript
+ */
+function randomElement(array) {
+  return array[Math.floor(Math.random() * array.length)];
 }
