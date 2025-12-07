@@ -5,7 +5,15 @@ const COLUMNS = 6;
 const ROWS = 3;
 
 export function MemoryCardsPage() {
-  const [grid] = useState(setupGrid);
+  const [grid, setGrid] = useState(setUpGrid());
+
+  function handleCardClick(key) {
+    setGrid(
+      grid.map((card, i) =>
+        i === key ? { ...card, revealed: !card.revealed } : card
+      )
+    );
+  }
 
   return (
     <>
@@ -17,8 +25,12 @@ export function MemoryCardsPage() {
           id="memory-card-container"
           style={{ gridTemplateColumns: `repeat(${COLUMNS}, auto)` }}
         >
-          {grid.map((v) => (
-            <MemoryCard {...v} revealed={true} />
+          {grid.map((card) => (
+            <MemoryCard
+              {...card}
+              key={card.key}
+              onClick={() => handleCardClick(card.key)}
+            />
           ))}
         </div>
       </main>
@@ -26,12 +38,12 @@ export function MemoryCardsPage() {
   );
 }
 
-function setupGrid() {
+function setUpGrid() {
   const grid = [];
 
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLUMNS; col++) {
-      grid.push({ icon: "😀" });
+      grid.push({ key: grid.length, icon: "😀", revealed: false });
     }
   }
   return grid;
