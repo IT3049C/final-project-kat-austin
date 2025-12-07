@@ -186,4 +186,15 @@ MARK: Memory Cards
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 68px;
+  width: 34px;
+}
+
+.memory-card-hidden {
+  border: 1px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 68px;
+  width: 34px;
 }
