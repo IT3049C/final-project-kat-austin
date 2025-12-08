@@ -8,8 +8,9 @@ export function MemoryCardsPage() {
   const [grid, setGrid] = useState(setUpGrid());
   // Tracks the keys of the cards that have been selected. Should only contain
   // two at a time.
-  /** @type {[number[], React.Dispatch<React.SetStateAction<number[]>>]} */
-  const [selectedCardKeys, setSelectedCardKeys] = useState([]);
+  const [selectedCardKeys, setSelectedCardKeys] = useState(
+    /**@type {number[]}*/ ([])
+  );
 
   function handleCardClick(clickedCard) {
     if (
@@ -26,8 +27,8 @@ export function MemoryCardsPage() {
     }
   }
 
-  /** 
-   * Checks if the two most recently selected cards match 
+  /**
+   * Checks if the two most recently selected cards match
    */
   function checkCards() {
     if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
