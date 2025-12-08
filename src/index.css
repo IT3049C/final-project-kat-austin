@@ -183,6 +183,7 @@ MARK: Memory Cards
 
 .memory-card {
   border: 1px solid;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -192,6 +193,7 @@ MARK: Memory Cards
 
 .memory-card-hidden {
   border: 1px solid;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
