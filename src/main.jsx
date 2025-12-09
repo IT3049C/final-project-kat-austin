@@ -9,12 +9,14 @@ import { WordlePage } from "./pages/WordlePage.jsx";
 import { HangmanPage } from "./pages/HangmanPage.jsx";
 import { MemoryCardsPage } from "./pages/MemoryCardsPage.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AppLayout } from "./components/AppLayout.jsx";
 
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <AppLayout/>,
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/game/rps", element: <RPSGamePage /> },
