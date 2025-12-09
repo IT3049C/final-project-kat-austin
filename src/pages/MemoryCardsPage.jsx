@@ -92,23 +92,31 @@ export function MemoryCardsPage() {
 
 function setUpGrid() {
   const grid = [];
+  // Need two of each icon.
+  const icons = [...emojis, ...emojis];
 
   for (let row = 0; row < config.rows; row++) {
     for (let col = 0; col < config.columns; col++) {
+      const elementData = randomElement(icons);
+
       grid.push({
         key: grid.length,
-        icon: randomElement(emojis),
+        icon: elementData.value,
         revealed: false,
         matchFound: false,
       });
+      icons.splice(elementData.index, 1);
     }
   }
   return grid;
 }
 
 /**
+ * Selects a random element from an array.
+ * @returns The value selected from the array and the index its located at.
  * @url https://www.tutorialspoint.com/how-to-select-a-random-element-from-array-in-javascript
  */
 function randomElement(array) {
-  return array[Math.floor(Math.random() * array.length)];
+  const index = Math.floor(Math.random() * array.length);
+  return { value: array[index], index };
 }
