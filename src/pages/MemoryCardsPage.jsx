@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { MemoryCard } from "../components/memory-cards/MemoryCard";
 import { config, emojis } from "../logic/memoryCards";
 
 const SELECTED_CARD_LIMIT = 2;
+const CARD_REVEAL_MILISECS = 2000;
 
 export function MemoryCardsPage() {
   const [grid, setGrid] = useState(setUpGrid());
@@ -12,25 +13,10 @@ export function MemoryCardsPage() {
     /**@type {number[]}*/ ([])
   );
 
-  function handleCardClick(clickedCard) {
-    if (
-      selectedCardKeys.length < SELECTED_CARD_LIMIT &&
-      !clickedCard.revealed &&
-      !clickedCard.matchFound
-    ) {
-      setGrid(
-        grid.map((card) =>
-          card.key === clickedCard.key ? { ...card, revealed: true } : card
-        )
-      );
-      setSelectedCardKeys([...selectedCardKeys, clickedCard.key]);
-    }
-  }
-
   /**
    * Checks if the two most recently selected cards match
    */
-  function checkCards() {
+  const checkCards = useCallback(() => {
     if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
       const selectedCard1 = grid.find(
         (card) => card.key === selectedCardKeys[0]
@@ -56,10 +42,29 @@ export function MemoryCardsPage() {
       );
       setSelectedCardKeys([]);
     }
-  }
+  }, [grid, selectedCardKeys]);
 
-  if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
-    setTimeout(checkCards, 2000);
+  useEffect(() => {
+    let timeoutId;
+    if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
+      timeoutId = setTimeout(checkCards, CARD_REVEAL_MILISECS);
+    }
+    return () => clearTimeout(timeoutId);
+  }, [checkCards, selectedCardKeys.length]);
+
+  function handleCardClick(clickedCard) {
+    if (
+      selectedCardKeys.length < SELECTED_CARD_LIMIT &&
+      !clickedCard.revealed &&
+      !clickedCard.matchFound
+    ) {
+      setGrid(
+        grid.map((card) =>
+          card.key === clickedCard.key ? { ...card, revealed: true } : card
+        )
+      );
+      setSelectedCardKeys([...selectedCardKeys, clickedCard.key]);
+    }
   }
 
   return (
