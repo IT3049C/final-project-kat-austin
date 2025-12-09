@@ -82,7 +82,6 @@ export function MemoryCardsPage() {
       <header>
         <h2>Memory Cards</h2>
       </header>
-      <main>
         <p>{status}</p>
         <div
           id="memory-card-container"
@@ -96,7 +95,6 @@ export function MemoryCardsPage() {
             />
           ))}
         </div>
-      </main>
     </>
   );
 }

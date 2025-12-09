@@ -172,7 +172,7 @@ export function WordlePage() {
   console.log(`Target word: ${targetWord}`);
 
   return (
-    <main>
+    <>
       <header>
         <h2>Wordle</h2>
       </header>
@@ -193,7 +193,7 @@ export function WordlePage() {
           ))}
         </div>
       </div>
-    </main>
+    </>
   );
 }
 

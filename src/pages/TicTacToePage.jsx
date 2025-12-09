@@ -41,7 +41,7 @@ export function TicTacToePage() {
   // const playerAvatar = settings?.avatar;
 
   return (
-    <main>
+    <>
       <header>
         <h2>Tic-Tac-Toe</h2>
       </header>
@@ -58,6 +58,6 @@ export function TicTacToePage() {
           <ol>{moves}</ol>
         </div>
       </div>
-    </main>
+    </>
   );
 }

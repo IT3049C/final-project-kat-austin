@@ -14,13 +14,13 @@ export function RPSGamePage() {
   
   // console.log(playerAvatar);
   return (
-    <main>
+    <>
       <header>
         <h2>Rock Paper Scissors</h2>
       </header>
       <PlayerInfoCard playerName={playerName} /*playerAvatar={playerAvatar}*/ />
       <GameSection difficulty={difficulty} />
       <HighScoresSection />
-    </main>
+    </>
   );
 }
