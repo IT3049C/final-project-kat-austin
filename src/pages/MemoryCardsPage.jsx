@@ -12,12 +12,13 @@ export function MemoryCardsPage() {
   const [selectedCardKeys, setSelectedCardKeys] = useState(
     /**@type {number[]}*/ ([])
   );
+  const [triesLeft, setTriesLeft] = useState(20);
 
   /**
    * Checks if the two most recently selected cards match
    */
   const checkCards = useCallback(() => {
-    if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
+    if (selectedCardKeys.length === SELECTED_CARD_LIMIT && triesLeft !== 0) {
       const selectedCard1 = grid.find(
         (card) => card.key === selectedCardKeys[0]
       );
@@ -32,6 +33,7 @@ export function MemoryCardsPage() {
       } else {
         // Flip the cards back over if they don't match
         cardCheckResult = { revealed: false };
+        setTriesLeft(triesLeft - 1);
       }
       setGrid(
         grid.map((card) =>
@@ -42,7 +44,7 @@ export function MemoryCardsPage() {
       );
       setSelectedCardKeys([]);
     }
-  }, [grid, selectedCardKeys]);
+  }, [grid, selectedCardKeys, triesLeft]);
 
   useEffect(() => {
     let timeoutId;
@@ -55,6 +57,7 @@ export function MemoryCardsPage() {
   function handleCardClick(clickedCard) {
     if (
       selectedCardKeys.length < SELECTED_CARD_LIMIT &&
+      triesLeft !== 0 &&
       !clickedCard.revealed &&
       !clickedCard.matchFound
     ) {
@@ -67,12 +70,20 @@ export function MemoryCardsPage() {
     }
   }
 
+  let status = "Tries left: " + triesLeft;
+  if (grid.every((card) => card.matchFound)) {
+    status = "Winner!";
+  } else if (triesLeft === 0) {
+    status = "Game Over";
+  }
+
   return (
     <>
       <header>
         <h2>Memory Cards</h2>
       </header>
       <main>
+        <p>{status}</p>
         <div
           id="memory-card-container"
           style={{ gridTemplateColumns: `repeat(${config.columns}, auto)` }}
