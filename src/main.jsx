@@ -7,6 +7,7 @@ import { RPSGamePage } from "./pages/RPSGamePage.jsx";
 import { TicTacToePage } from "./pages/TicTacToePage.jsx";
 import { WordlePage } from "./pages/WordlePage.jsx";
 import { HangmanPage } from "./pages/HangmanPage.jsx";
+import { MemoryCardsPage } from "./pages/MemoryCardsPage.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
       { path: "/game/tic-tac-toe", element: <TicTacToePage /> },
       { path: "/game/wordle", element: <WordlePage /> },
       { path: "/game/hangman", element: <HangmanPage /> },
+      { path: "/game/memory-cards", element: <MemoryCardsPage /> },
     ],
   },
 ]);
