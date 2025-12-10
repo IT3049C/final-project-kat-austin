@@ -209,6 +209,17 @@ MARK: Tic-tac-toe
 }
 
 /**
+MARK: Hangman
+*/
+.game-status {
+  text-align: center;
+}
+
+.letter-buttons {
+  text-align: center;
+}
+
+/**
 MARK: Memory Cards
 */
 #memory-card-container {
