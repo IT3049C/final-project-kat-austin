@@ -196,15 +196,16 @@ MARK: Tic-tac-toe
   display: table;
 }
 
-.status {
+.tic-tac-toe-status {
   margin-bottom: 10px;
 }
-.game {
+
+.tic-tac-toe-game {
   display: flex;
   flex-direction: row;
 }
 
-.game-info {
+.tic-tac-toe-info {
   margin-left: 20px;
 }
 

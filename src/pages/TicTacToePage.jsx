@@ -38,15 +38,14 @@ export function TicTacToePage() {
 
   // Use the settings in your existing game logic
   const playerName = settings?.name || "Player";
-  // const playerAvatar = settings?.avatar;
 
   return (
     <>
       <header>
         <h2>Tic-Tac-Toe</h2>
       </header>
-      <PlayerInfoCard playerName={playerName} /*playerAvatar={playerAvatar}*/ />
-      <div className="game">
+      <PlayerInfoCard playerName={playerName} />
+      <div className="tic-tac-toe-game">
         <div className="game-board">
           <Board
             xIsNext={xIsNext}
@@ -54,7 +53,7 @@ export function TicTacToePage() {
             onPlay={handlePlay}
           />
         </div>
-        <div className="game-info">
+        <div className="tic-tac-toe-info">
           <ol>{moves}</ol>
         </div>
       </div>
