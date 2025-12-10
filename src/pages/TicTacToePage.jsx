@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { loadSettings } from "../logic/storage";
-import { PlayerInfoCard } from "../components/rps-game/PlayerInfoCard";
+import { GameHeader } from "../components/GameHeader";
 import { Board } from "../components/tic-tac-toe/Board";
 
 export function TicTacToePage() {
@@ -33,18 +33,12 @@ export function TicTacToePage() {
     );
   });
 
-  // Load settings directly in the component
   const settings = loadSettings();
-
-  // Use the settings in your existing game logic
   const playerName = settings?.name || "Player";
 
   return (
     <>
-      <header>
-        <h2>Tic-Tac-Toe</h2>
-      </header>
-      <PlayerInfoCard playerName={playerName} />
+      <GameHeader gameName="Tic-Tac-Toe" playerName={playerName}/>
       <div className="tic-tac-toe-game">
         <div className="game-board">
           <Board

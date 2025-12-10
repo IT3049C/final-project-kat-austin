@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { MemoryCard } from "../components/memory-cards/MemoryCard";
 import { config, emojis } from "../logic/memoryCards";
+import { loadSettings } from "../logic/storage";
+import { GameHeader } from "../components/GameHeader";
 
 const SELECTED_CARD_LIMIT = 2;
 const CARD_REVEAL_MILISECS = 2000;
@@ -70,6 +72,9 @@ export function MemoryCardsPage() {
     }
   }
 
+  const settings = loadSettings();
+  const playerName = settings?.name || "Player";
+
   let status = "Tries left: " + triesLeft;
   if (grid.every((card) => card.matchFound)) {
     status = "Winner!";
@@ -79,9 +84,7 @@ export function MemoryCardsPage() {
 
   return (
     <>
-      <header>
-        <h2>Memory Cards</h2>
-      </header>
+      <GameHeader gameName="Memory Cards" playerName={playerName}/>
         <p>{status}</p>
         <div
           id="memory-card-container"

@@ -8,6 +8,8 @@ import HangmanBoard from "./HangmanBoard";
 import WordDisplay from "./WordDisplay";
 import LetterButtons from "./LetterButtons";
 import GameStatus from "./GameStatus";
+import { GameHeader } from "../GameHeader";
+import { loadSettings } from "../../logic/storage";
 
 export default function HangmanGame() {
   const [gameState, setGameState] = useState(null);
@@ -28,11 +30,12 @@ export default function HangmanGame() {
 
   const displayWord = getDisplayWord(gameState.word, gameState.guessedLetters);
 
+  const settings = loadSettings();
+  const playerName = settings?.name || "Player";
+
   return (
     <>
-      <header>
-        <h2>Hangman</h2>
-      </header>
+      <GameHeader gameName="Hangman" playerName={playerName} />
       <HangmanBoard attempts={gameState.attempts} />
 
       <WordDisplay word={displayWord} />

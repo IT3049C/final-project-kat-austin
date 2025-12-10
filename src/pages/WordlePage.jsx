@@ -6,6 +6,8 @@ import {
   isWordValid,
 } from "../logic/wordle.js";
 import { useQuery } from "@tanstack/react-query";
+import { loadSettings } from "../logic/storage.js";
+import { GameHeader } from "../components/GameHeader.jsx";
 
 export function WordlePage() {
   const [currentAttempt, setCurrentAttempt] = useState(0);
@@ -155,6 +157,9 @@ export function WordlePage() {
     }
   }
 
+  const settings = loadSettings();
+  const playerName = settings?.name || "Player";
+
   if (isLoading) {
     return <p>Loading...</p>;
   } else if (error) {
@@ -165,9 +170,7 @@ export function WordlePage() {
 
   return (
     <>
-      <header>
-        <h2>Wordle</h2>
-      </header>
+      <GameHeader gameName="Wordle" playerName={playerName}/>
       <p id="game-result">{resultText}</p>
       <div
         id="wordle-grid"
