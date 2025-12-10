@@ -15,6 +15,8 @@
   /* Light Theming */
   --color-text: #213547;
   --color-background: #ffffff;
+  --color-border: #ccc;
+  --color-surface: #1a1a1a;
   --color-anchor-hover: #747bff;
   --color-button-bg: #f9f9f9;
   /* For Wordle */
@@ -30,6 +32,8 @@
   :root {
     --color-text: rgba(255, 255, 255, 0.87);
     --color-background: #242424;
+    --color-border: #555;
+    --color-surface: #1a1a1a;
     --color-anchor-hover: #535bf2;
     --color-button-bg: #1a1a1a;
     --correct: #538d4e;
@@ -86,10 +90,17 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-
 /**
 MARK: Rock Paper Scissors 
 */
+.card {
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-block: 1rem;
+  background-color: var(--color-surface);
+}
+
 .score-row {
   display: flex;
   gap: 1rem;
