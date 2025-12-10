@@ -4,11 +4,11 @@ import { Navigation } from "./Navigation";
 export function AppLayout() {
   return (
     <>
-      <header>
+      <header id="app-header">
         <h1>GameHub</h1>
       </header>
       <Navigation />
-      <main>
+      <main id="app-main">
         <Outlet />
       </main>
     </>

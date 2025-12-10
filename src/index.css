@@ -42,11 +42,47 @@
   }
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  /* display: flex; */
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  /* border: 1px solid red; */
+}
+
+#app-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid green; */
+}
+
+#app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid yellow; */
+}
+
+#app-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* border: 1px solid orange; */
 }
 
 a {
@@ -56,14 +92,6 @@ a {
 }
 a:hover {
   color: var(--color-anchor-hover);
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -132,13 +160,6 @@ MARK: Wordle
   display: grid;
   grid-template-columns: repeat(5, 60px);
   column-gap: 8px;
-}
-
-#game {
-  height: 70vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .correct {

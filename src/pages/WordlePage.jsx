@@ -156,17 +156,9 @@ export function WordlePage() {
   }
 
   if (isLoading) {
-    return (
-      <main>
-        <p>Loading...</p>
-      </main>
-    );
+    return <p>Loading...</p>;
   } else if (error) {
-    return (
-      <main>
-        <p>Error getting a target word.</p>
-      </main>
-    );
+    return <p>Error getting a target word.</p>;
   }
 
   console.log(`Target word: ${targetWord}`);
@@ -176,22 +168,20 @@ export function WordlePage() {
       <header>
         <h2>Wordle</h2>
       </header>
-      <div id="game">
-        <p id="game-result">{resultText}</p>
-        <div
-          id="wordle-grid"
-          style={{ gridTemplateColumns: `repeat(${config.wordLength}, 60px)` }}
-        >
-          {grid.map((v, i) => (
-            <div
-              key={i}
-              className={`letter ${v.result}`}
-              id={`cell-${v.row}-${v.col}`}
-            >
-              {v.letter}
-            </div>
-          ))}
-        </div>
+      <p id="game-result">{resultText}</p>
+      <div
+        id="wordle-grid"
+        style={{ gridTemplateColumns: `repeat(${config.wordLength}, 60px)` }}
+      >
+        {grid.map((v, i) => (
+          <div
+            key={i}
+            className={`letter ${v.result}`}
+            id={`cell-${v.row}-${v.col}`}
+          >
+            {v.letter}
+          </div>
+        ))}
       </div>
     </>
   );
