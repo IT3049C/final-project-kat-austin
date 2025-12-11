@@ -1,18 +1,20 @@
-// Code from https://uc.instructure.com/courses/1807548/pages/simulating-multiplayer-games-with-the-games-room-api
-import { useState } from 'react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+// Code from 
+// https://uc.instructure.com/courses/1807548/pages/simulating-multiplayer-games-with-the-games-room-api
+import { useState } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-const BASE = 'https://game-room-api.fly.dev';
+const BASE = "https://game-room-api.fly.dev";
 
 /**
  * @returns {Promise<{ roomId: string; gameState: any }}
  */
-async function apiCreateRoom(initialState){
+async function apiCreateRoom(initialState) {
   const res = await fetch(`${BASE}/api/rooms`, {
-    method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ initialState })
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ initialState }),
   });
-  if(!res.ok) throw new Error('Failed to create room');
+  if (!res.ok) throw new Error("Failed to create room");
   return res.json();
 }
 
@@ -20,9 +22,9 @@ async function apiCreateRoom(initialState){
  * @param {string} roomId
  * @returns {Promise<{ id: string; gameState: any }>}
  */
-async function apiGetRoom(roomId){
+async function apiGetRoom(roomId) {
   const res = await fetch(`${BASE}/api/rooms/${roomId}`);
-  if(!res.ok) throw new Error('Room not found');
+  if (!res.ok) throw new Error("Room not found");
   return res.json();
 }
 
@@ -30,26 +32,31 @@ async function apiGetRoom(roomId){
  * @param {string} roomId
  * @returns {Promise<{ id: string; gameState: any }>}
  */
-async function apiUpdateRoom(roomId, gameState){
+async function apiUpdateRoom(roomId, gameState) {
   const res = await fetch(`${BASE}/api/rooms/${roomId}`, {
-    method: 'PUT', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ gameState })
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ gameState }),
   });
-  if(!res.ok) throw new Error('Failed to update room');
+  if (!res.ok) throw new Error("Failed to update room");
   return res.json();
 }
 
 /**
- * @param {object} options 
+ * @param {object} options
  * @param {number | undefined} options.refetchInterval
  */
-export function useGameRoom(options){
-  const [roomId, setRoomId] = useState(null);
+export function useGameRoom(options) {
+  const [roomId, setRoomId] = useState(/**@type {string | null}*/ (null));
   const qc = useQueryClient();
 
-  const { data: state, isLoading, error } = useQuery({
-    queryKey: ['room', roomId],
-    queryFn: () => apiGetRoom(roomId).then(r => r.gameState),
+  const {
+    data: state,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["room", roomId],
+    queryFn: () => apiGetRoom(roomId).then((room) => room.gameState),
     enabled: !!roomId,
     refetchInterval: options?.refetchInterval ?? 800,
   });
@@ -58,13 +65,13 @@ export function useGameRoom(options){
     mutationFn: apiCreateRoom,
     onSuccess: ({ roomId: rId, gameState }) => {
       setRoomId(rId);
-      qc.setQueryData(['room', rId], gameState);
-    }
+      qc.setQueryData(["room", rId], gameState);
+    },
   });
 
   const pushState = useMutation({
     mutationFn: async (next) => {
-      if(!roomId) throw new Error('No room');
+      if (!roomId) throw new Error("No room");
       const latest = await apiGetRoom(roomId);
       const version = (latest.gameState?.version ?? 0) + 1;
       const merged = { ...next, version };
@@ -72,8 +79,8 @@ export function useGameRoom(options){
       return updated.gameState;
     },
     onSuccess: (gameState) => {
-      if(roomId) qc.setQueryData(['room', roomId], gameState);
-    }
+      if (roomId) qc.setQueryData(["room", roomId], gameState);
+    },
   });
 
   return {
