@@ -6,7 +6,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 const BASE = "https://game-room-api.fly.dev";
 
 /**
- * @returns {Promise<{ roomId: string; gameState: any }}
+ * Creates a new room on the server.
+ * @returns {Promise<{ roomId: string; gameState: any }} The newly created room
+ * and its state.
  */
 async function apiCreateRoom(initialState) {
   const res = await fetch(`${BASE}/api/rooms`, {
@@ -19,7 +21,8 @@ async function apiCreateRoom(initialState) {
 }
 
 /**
- * @param {string} roomId
+ * Reads an existing room on the server.
+ * @param {string} roomId the id of the room you want to read.
  * @returns {Promise<{ id: string; gameState: any }>}
  */
 async function apiGetRoom(roomId) {
@@ -29,8 +32,9 @@ async function apiGetRoom(roomId) {
 }
 
 /**
- * @param {string} roomId
- * @returns {Promise<{ id: string; gameState: any }>}
+ * Updates an existing room on the server.
+ * @param {string} roomId The id of the room you want to update.
+ * @returns {Promise<{ id: string; gameState: any }>} The updated room object.
  */
 async function apiUpdateRoom(roomId, gameState) {
   const res = await fetch(`${BASE}/api/rooms/${roomId}`, {
