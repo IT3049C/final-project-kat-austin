@@ -190,10 +190,15 @@ MARK: Tic-tac-toe
   width: 34px;
 }
 
-.board-row:after {
+/* .board-row:after {
   clear: both;
   content: "";
   display: table;
+} */
+
+.tic-tac-toe-grid {
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .tic-tac-toe-status {
