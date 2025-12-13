@@ -1,14 +1,14 @@
-import { useState, useEffect } from 'react';
-import { loadSettings, saveSettings } from '../logic/storage';
+import { useState, useEffect } from "react";
+import { loadSettings, saveSettings } from "../logic/storage";
 
 export function HomePage() {
-  const [playerName, setPlayerName] = useState('');
-  const [inputName, setInputName] = useState('');
+  const [playerName, setPlayerName] = useState("");
+  const [inputName, setInputName] = useState("");
 
   useEffect(() => {
     const settings = loadSettings();
-    setPlayerName(settings?.name || '');
-    setInputName(settings?.name || '');
+    setPlayerName(settings?.name || "");
+    setInputName(settings?.name || "");
   }, []);
 
   const handleSaveName = () => {
@@ -18,9 +18,10 @@ export function HomePage() {
 
   return (
     <>
-      <p>Welcome to GameHub</p>
-      
-      <section className="player-name-section">
+      <header>
+        <h2>Welcome to GameHub</h2>
+      </header>
+      <section className="player-name-section card">
         <h2>Player Settings</h2>
         <label htmlFor="player-name">
           Your Name:
@@ -33,7 +34,11 @@ export function HomePage() {
           />
         </label>
         <button onClick={handleSaveName}>Save Name</button>
-        {playerName && <p>Current name: <strong>{playerName}</strong></p>}
+        {playerName && (
+          <p>
+            Current name: <strong>{playerName}</strong>
+          </p>
+        )}
       </section>
     </>
   );
