@@ -24,13 +24,13 @@ export function Board({ xIsNext, squares, onPlay }) {
     : `Next player: ${xIsNext ? "X" : "O"}`;
 
   return (
-    <>
+    <div className="game-board">
       <div className="tic-tac-toe-status">{status}</div>
       <div className="tic-tac-toe-grid">
         {squares?.map((square, i) => (
           <Square key={i} value={square} onSquareClick={() => handleClick(i)} />
         ))}
       </div>
-    </>
+    </div>
   );
 }

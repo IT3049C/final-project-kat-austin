@@ -39,6 +39,7 @@ export function TicTacToePage() {
     });
 
   const xIsNext = state?.turn % 2 === 0;
+  const currentSquares = state?.board ?? [];
   const settings = loadSettings();
   const playerName = settings?.name || "Player";
 
@@ -47,6 +48,7 @@ export function TicTacToePage() {
    */
   function handlePlay(nextSquares) {
     const turnOf = xIsNext ? "O" : "X";
+    // Don't let person play if it isn't their turn.
     if (turnOf === "X" && !joinedRoom) return;
     if (turnOf === "O" && joinedRoom) return;
 
@@ -92,13 +94,11 @@ export function TicTacToePage() {
         <>
           <p>You are {joinedRoom ? "O" : "X"}</p>
           <div className="tic-tac-toe-game">
-            <div className="game-board">
-              <Board
-                xIsNext={xIsNext}
-                squares={state?.board ?? []}
-                onPlay={handlePlay}
-              />
-            </div>
+            <Board
+              xIsNext={xIsNext}
+              squares={currentSquares}
+              onPlay={handlePlay}
+            />
           </div>
         </>
       )}
