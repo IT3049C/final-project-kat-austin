@@ -3,9 +3,10 @@ import { loadSettings } from "../logic/storage";
 import { GameHeader } from "../components/GameHeader";
 import { Board } from "../components/tic-tac-toe/Board";
 import { useGameRoom } from "../hooks/useGameRoom";
-import { calculateWinner } from "../logic/ticTacToe";
+import { calculateWinner, checkXNext } from "../logic/ticTacToe";
 import { Multiplayer } from "../components/Multiplayer";
 import { ModeToggleButton } from "../components/ModeToggleButton";
+import { Moves } from "../components/tic-tac-toe/Moves";
 
 /**
  * @typedef {object} TicTacToeState
@@ -30,6 +31,9 @@ const DEFAULT = {
 };
 
 export function TicTacToePage() {
+  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [currentMove, setCurrentMove] = useState(0);
+
   const [mode, setMode] = useState("single");
   // Tracks who joined the room vs created the room
   const [joinedRoom, setJoinedRoom] = useState(false);
@@ -40,8 +44,11 @@ export function TicTacToePage() {
       refetchInterval: 1000,
     });
 
-  const xIsNext = state?.turn % 2 === 0;
-  const currentSquares = state?.board ?? [];
+  const xIsNext =
+    mode === "single" ? checkXNext(currentMove) : checkXNext(state?.turn);
+  const currentSquares =
+    mode === "single" ? history[currentMove] : state?.board ?? [];
+
   const settings = loadSettings();
   const playerName = settings?.name || "Player";
 
@@ -49,30 +56,41 @@ export function TicTacToePage() {
    * @param {("X" | "O" | null)[]} nextSquares
    */
   function handlePlay(nextSquares) {
-    const turnOf = xIsNext ? "O" : "X";
-    // Don't let person play if it isn't their turn.
-    if (turnOf === "X" && !joinedRoom) return;
-    if (turnOf === "O" && joinedRoom) return;
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
 
-    /** @type {TicTacToeState} */
-    const gameState = {
-      players: state.players,
-      turn: state.turn + 1,
-      board: nextSquares,
-      winner: calculateWinner(nextSquares),
-      version: state.version + 1,
-      updatedBy: xIsNext ? "O" : "X",
-      updatedAt: Date.now(),
-    };
-    pushState(gameState);
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
+
+    if (mode === "multi") {
+      const turnOf = xIsNext ? "O" : "X";
+      // Don't let person play if it isn't their turn.
+      if (turnOf === "X" && !joinedRoom) return;
+      if (turnOf === "O" && joinedRoom) return;
+
+      /** @type {TicTacToeState} */
+      const gameState = {
+        players: state.players,
+        turn: state.turn + 1,
+        board: nextSquares,
+        winner: calculateWinner(nextSquares),
+        version: state.version + 1,
+        updatedBy: xIsNext ? "O" : "X",
+        updatedAt: Date.now(),
+      };
+      pushState(gameState);
+    }
   }
 
   function handleToggleMode() {
     if (mode === "single") {
       setMode("multi");
+      setHistory([Array(9).fill(null)]);
+      setCurrentMove(0);
     } else {
       setMode("single");
       setRoomId(null);
+      setHistory([Array(9).fill(null)]);
+      setCurrentMove(0);
     }
   }
 
@@ -86,7 +104,6 @@ export function TicTacToePage() {
   }
 
   if (loading) {
-    console.log(joinedRoom);
     setJoinedRoom(true);
     setLoading(false);
     pushState({ ...state, players: [...state.players, "O"] });
@@ -96,24 +113,25 @@ export function TicTacToePage() {
     <>
       <GameHeader gameName="Tic-Tac-Toe" playerName={playerName} />
       <ModeToggleButton mode={mode} onToggleMode={handleToggleMode} />
-      <Multiplayer
-        onCreateRoom={createRoom}
-        initialState={{ ...DEFAULT, players: ["X"] }}
-        roomId={roomId}
-        setRoomId={setRoomId}
-      />
-      {roomId && (
+      {mode === "multi" && (
         <>
-          <p>You are {joinedRoom ? "O" : "X"}</p>
-          <div className="tic-tac-toe-game">
-            <Board
-              xIsNext={xIsNext}
-              squares={currentSquares}
-              onPlay={handlePlay}
-            />
-          </div>
+          <Multiplayer
+            onCreateRoom={createRoom}
+            initialState={{ ...DEFAULT, players: ["X"] }}
+            roomId={roomId}
+            setRoomId={setRoomId}
+          />
+          <p>{roomId ? `You are ${joinedRoom ? "O" : "X"}` : ""}</p>
         </>
       )}
+      <div className="tic-tac-toe-game">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+        <div className="tic-tac-toe-info">
+          {mode === "single" && (
+            <Moves history={history} jumpTo={(move) => setCurrentMove(move)} />
+          )}
+        </div>
+      </div>
     </>
   );
 }

@@ -20,3 +20,10 @@ export function calculateWinner(squares) {
   }
   return null;
 }
+
+/**
+ * @param {number} turn 
+ */
+export function checkXNext(turn) {
+  return turn % 2 === 0
+}
