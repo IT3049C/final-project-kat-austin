@@ -1,5 +1,10 @@
 # GameHub
-## Khadeeja Tunkara and Austin Schnee
+
+## Credits
+
+- [Austin Schnee](https://github.com/DragonGuyMan)
+- [Khadeeja Tunkara](https://github.com/SpiteTheGhost)
+
 ## Checklist
 
 - [ ] frequent commits to github.
