@@ -1,4 +1,4 @@
-// Code from 
+// Code from
 // https://uc.instructure.com/courses/1807548/pages/simulating-multiplayer-games-with-the-games-room-api
 
 const BASE = "https://game-room-api.fly.dev";
@@ -44,3 +44,20 @@ export async function apiUpdateRoom(roomId, gameState) {
   return res.json();
 }
 
+/**
+ * Meant to prevent conflicts between players games.
+ * @param {string} roomId The ID of the room to update.
+ * @param {*} localState The local game state.
+ * @param {*} pushState The pushState function from the useGameHook.
+ * @returns The latest game state from the server if version doesn't match, or 
+ * the result of updating the room.
+ */
+export async function safePush(roomId, localState, pushState) {
+  const latest = await apiGetRoom(roomId);
+
+  if ((latest.gameState.version ?? 0) !== (localState.version ?? 0)) {
+    // Someone else moved. merge or ask user to retry
+    return latest.gameState;
+  }
+  return pushState(localState);
+}

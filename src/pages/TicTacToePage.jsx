@@ -7,6 +7,7 @@ import { calculateWinner, checkXNext } from "../logic/ticTacToe";
 import { Multiplayer } from "../components/Multiplayer";
 import { ModeToggleButton } from "../components/ModeToggleButton";
 import { Moves } from "../components/tic-tac-toe/Moves";
+import { safePush } from "../utils/gameRoom";
 
 /**
  * @typedef {object} TicTacToeState
@@ -52,7 +53,7 @@ export function TicTacToePage() {
   /**
    * @param {("X" | "O" | null)[]} nextSquares
    */
-  function handlePlay(nextSquares) {
+  async function handlePlay(nextSquares) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
 
     setHistory(nextHistory);
@@ -65,25 +66,23 @@ export function TicTacToePage() {
         turn: state.turn + 1,
         board: nextSquares,
         winner: calculateWinner(nextSquares),
-        version: state.version + 1,
-        updatedBy: xIsNext ? "O" : "X",
+        version: state?.version ?? 0,
+        updatedBy: null,
         updatedAt: Date.now(),
       };
-      pushState(gameState);
+      await safePush(roomId, gameState, pushState);
     }
   }
 
   function handleToggleMode() {
     if (mode === "single") {
       setMode("multi");
-      setHistory([Array(9).fill(null)]);
-      setCurrentMove(0);
     } else {
       setMode("single");
       setRoomId(null);
-      setHistory([Array(9).fill(null)]);
-      setCurrentMove(0);
     }
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
   }
 
   if (isLoading) {

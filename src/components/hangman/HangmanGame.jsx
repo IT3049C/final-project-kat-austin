@@ -9,6 +9,7 @@ import GameStatus from './GameStatus';
 import { GameHeader } from '../GameHeader';
 import { loadSettings } from '../../logic/storage';
 import { ModeToggleButton } from '../ModeToggleButton';
+import { safePush } from '../../utils/gameRoom';
 
 export default function HangmanGame() {
   const [mode, setMode] = useState('single'); 
@@ -30,7 +31,7 @@ export default function HangmanGame() {
       setGameState(prevState => guessLetter(prevState, letter));
     } else if (mode === 'multi') {
       const nextState = guessLetter(gameState, letter);
-      await pushState(nextState); 
+      await safePush(roomId, nextState, pushState);
     }
   };
 
@@ -39,7 +40,7 @@ export default function HangmanGame() {
     if (mode === 'single') {
       setGameState(newState);
     } else if (mode === 'multi') {
-      await pushState(newState); 
+      await safePush(roomId, newState, pushState); 
     }
   };
 
