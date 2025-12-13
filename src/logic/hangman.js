@@ -29,7 +29,8 @@ export function initializeGame() {
     guessedLetters: [],
     attempts: MAX_ATTEMPTS,
     gameOver: false,
-    won: false
+    won: false,
+    version: 0
   };
 }
 
