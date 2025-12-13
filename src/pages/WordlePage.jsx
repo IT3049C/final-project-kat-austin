@@ -24,6 +24,9 @@ export function WordlePage() {
     queryFn: async () => (await getRandomWord()).toUpperCase(),
   });
 
+  const settings = loadSettings();
+  const playerName = settings?.name || "Player";
+
   useEffect(() => {
     document.addEventListener("keydown", handleKeydown);
     return lockInput;
@@ -121,8 +124,9 @@ export function WordlePage() {
       let guess = "";
 
       row.forEach((v) => (guess += v.letter));
+      const wordValid = await isWordValid(guess);
 
-      if (!(await isWordValid(guess))) {
+      if (!wordValid) {
         //shakeRow();
         alert("Please enter a real word.");
       } else if (guess.toUpperCase() === targetWord) {
@@ -136,7 +140,7 @@ export function WordlePage() {
         setCurrentPosition(0);
       }
     }
-    if (currentAttempt >= config.attemptNum) {
+    if (currentAttempt >= config.attemptNum - 1) {
       lockInput();
       setResultText("Game Over!");
     }
@@ -157,9 +161,6 @@ export function WordlePage() {
     }
   }
 
-  const settings = loadSettings();
-  const playerName = settings?.name || "Player";
-
   if (isLoading) {
     return <p>Loading...</p>;
   } else if (error) {
@@ -170,7 +171,7 @@ export function WordlePage() {
 
   return (
     <>
-      <GameHeader gameName="Wordle" playerName={playerName}/>
+      <GameHeader gameName="Wordle" playerName={playerName} />
       <p id="game-result">{resultText}</p>
       <div
         id="wordle-grid"
@@ -181,6 +182,7 @@ export function WordlePage() {
             key={i}
             className={`letter ${v.result}`}
             id={`cell-${v.row}-${v.col}`}
+            data-testid="wordle-letter"
           >
             {v.letter}
           </div>

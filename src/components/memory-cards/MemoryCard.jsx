@@ -9,8 +9,9 @@ export function MemoryCard({ icon, onClick, revealed = false }) {
     <button
       className={revealed ? "memory-card" : "memory-card-hidden"}
       onClick={onClick}
+      data-testid="memory-card-button"
     >
-      {revealed ? <p>{icon}</p> : <p></p>}
+      <p>{revealed ? icon : ""}</p>
     </button>
   );
 }
