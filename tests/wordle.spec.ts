@@ -18,6 +18,7 @@ test.describe("Wordle", () => {
   });
 
   test("Wordle Test", async ({ page }) => {
+    /* Loading initial game state */
     await page.goto("/game/wordle");
 
     await expect(page.getByRole("heading", { name: "Wordle" })).toBeVisible();
@@ -31,11 +32,12 @@ test.describe("Wordle", () => {
       expect(cell).toHaveText("");
     }
 
+    /* Testing components can be interacted with */
     await page.keyboard.type(WORD);
     await page.keyboard.press("Enter");
 
     for (let i = 0; i < config.wordLength; i++) {
-      expect((await cells.all())[i]).toHaveText(WORD[i]);
+      await expect((await cells.all())[i]).toHaveText(WORD[i]);
     }
 
     await expect(page.getByText("You Win!")).toBeVisible();
@@ -45,7 +47,7 @@ test.describe("Wordle", () => {
 
     await expect(cells).toHaveCount(LETTER_COUNT);
     for (const cell of await cells.all()) {
-      expect(cell).toHaveText("");
+      await expect(cell).toHaveText("");
     }
   });
 });
