@@ -29,7 +29,7 @@ export function MemoryCardsPage() {
       );
       let cardCheckResult;
 
-      if (selectedCard1.icon === selectedCard2.icon) {
+      if (selectedCard1?.icon === selectedCard2?.icon) {
         // Indicate that a match has been found for that card
         cardCheckResult = { matchFound: true };
       } else {
@@ -39,7 +39,7 @@ export function MemoryCardsPage() {
       }
       setGrid(
         grid.map((card) =>
-          card.key === selectedCard1.key || card.key === selectedCard2.key
+          card.key === selectedCard1?.key || card.key === selectedCard2?.key
             ? { ...card, ...cardCheckResult }
             : card
         )
@@ -49,6 +49,7 @@ export function MemoryCardsPage() {
   }, [grid, selectedCardKeys, triesLeft]);
 
   useEffect(() => {
+    /** @type {NodeJS.Timeout} */
     let timeoutId;
     if (selectedCardKeys.length === SELECTED_CARD_LIMIT) {
       timeoutId = setTimeout(checkCards, CARD_REVEAL_MILISECS);
@@ -84,20 +85,20 @@ export function MemoryCardsPage() {
 
   return (
     <>
-      <GameHeader gameName="Memory Cards" playerName={playerName}/>
-        <p>{status}</p>
-        <div
-          id="memory-card-container"
-          style={{ gridTemplateColumns: `repeat(${config.columns}, auto)` }}
-        >
-          {grid.map((card) => (
-            <MemoryCard
-              {...card}
-              key={card.key}
-              onClick={() => handleCardClick(card)}
-            />
-          ))}
-        </div>
+      <GameHeader gameName="Memory Cards" playerName={playerName} />
+      <p>{status}</p>
+      <div
+        id="memory-card-container"
+        style={{ gridTemplateColumns: `repeat(${config.columns}, auto)` }}
+      >
+        {grid.map((card) => (
+          <MemoryCard
+            {...card}
+            key={card.key}
+            onClick={() => handleCardClick(card)}
+          />
+        ))}
+      </div>
     </>
   );
 }
