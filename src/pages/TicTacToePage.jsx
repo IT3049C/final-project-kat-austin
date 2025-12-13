@@ -35,9 +35,6 @@ export function TicTacToePage() {
   const [currentMove, setCurrentMove] = useState(0);
 
   const [mode, setMode] = useState("single");
-  // Tracks who joined the room vs created the room
-  const [joinedRoom, setJoinedRoom] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const { roomId, state, isLoading, error, setRoomId, createRoom, pushState } =
     useGameRoom({
@@ -62,12 +59,7 @@ export function TicTacToePage() {
     setCurrentMove(nextHistory.length - 1);
 
     if (mode === "multi") {
-      const turnOf = xIsNext ? "O" : "X";
-      // Don't let person play if it isn't their turn.
-      if (turnOf === "X" && !joinedRoom) return;
-      if (turnOf === "O" && joinedRoom) return;
-
-      /** @type {TicTacToeState} */
+    /** @type {TicTacToeState} */
       const gameState = {
         players: state.players,
         turn: state.turn + 1,
@@ -95,18 +87,10 @@ export function TicTacToePage() {
   }
 
   if (isLoading) {
-    if (!loading) setLoading(true);
     return <p>Loading room...</p>;
   } else if (error) {
-    if (loading) setLoading(false);
     console.error(error);
     return <p>{error.message}</p>;
-  }
-
-  if (loading) {
-    setJoinedRoom(true);
-    setLoading(false);
-    pushState({ ...state, players: [...state.players, "O"] });
   }
 
   return (
@@ -121,7 +105,6 @@ export function TicTacToePage() {
             roomId={roomId}
             setRoomId={setRoomId}
           />
-          <p>{roomId ? `You are ${joinedRoom ? "O" : "X"}` : ""}</p>
         </>
       )}
       <div className="tic-tac-toe-game">
