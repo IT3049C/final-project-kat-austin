@@ -22,29 +22,29 @@ Testing is conducted in this project with Playwright. To run all Playwright test
 
 ## Checklist
 
-- [ ] frequent commits to github.
-- [ ] filled out the self-evaluation.
+- [x] frequent commits to github.
+- [x] filled out the self-evaluation.
 
 ## Self Grading Guide
 <!--- Update the following line with your self-grade --->
 <!--- Check the Rubric on Canvas for a guideline --->
 
-I should get **( )** out of 20 on this assignment.
+We should get **(20)** out of 20 on this assignment.
 
 ## Self-Reflection
 
 - **How long it took me to finish this?**
 <!-- Answer below this line -->
--
+-It took us a couple days of working on and off to finish. We completed the first part of the gamehub ahead of time before bringing in the multiplayer components once we went over them in class.
 
 - **What do you think of this completion time?**
 <!-- Answer below this line -->
-- 
+- I think we made good time. 
 
 - **In hindsight, what would you do differently?**
 - <!-- Answer below this line -->
-- 
+- Nothing.
 
 - **What resources did you use?**
 - <!-- Answer below this line -->
-- 
+- Github, GameRoomAPI, professors videos, and some youtube tutorials. 
