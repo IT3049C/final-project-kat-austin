@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { config } from "../src/logic/wordle";
 
 const LETTER_COUNT = config.wordLength * config.attemptNum;
-const WORD = "hello";
+const WORD = "ghost";
 
 test.describe("Wordle", () => {
   test.beforeEach(async ({ page }) => {
