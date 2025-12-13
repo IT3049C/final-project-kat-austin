@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { initializeGame, guessLetter, getDisplayWord } from '../../logic/hangman';
 import { useGameRoom } from '../../hooks/useGameRoom'; 
-import Multiplayer from '../Multiplayer';
+import { Multiplayer } from '../Multiplayer';
 import HangmanBoard from './HangmanBoard';
 import WordDisplay from './WordDisplay';
 import LetterButtons from './LetterButtons';
