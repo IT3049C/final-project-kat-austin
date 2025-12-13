@@ -5,6 +5,7 @@ import { Board } from "../components/tic-tac-toe/Board";
 import { useGameRoom } from "../hooks/useGameRoom";
 import { calculateWinner } from "../logic/ticTacToe";
 import { Multiplayer } from "../components/Multiplayer";
+import { ModeToggleButton } from "../components/ModeToggleButton";
 
 /**
  * @typedef {object} TicTacToeState
@@ -29,6 +30,7 @@ const DEFAULT = {
 };
 
 export function TicTacToePage() {
+  const [mode, setMode] = useState("single");
   // Tracks who joined the room vs created the room
   const [joinedRoom, setJoinedRoom] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -65,6 +67,15 @@ export function TicTacToePage() {
     pushState(gameState);
   }
 
+  function handleToggleMode() {
+    if (mode === "single") {
+      setMode("multi");
+    } else {
+      setMode("single");
+      setRoomId(null);
+    }
+  }
+
   if (isLoading) {
     if (!loading) setLoading(true);
     return <p>Loading room...</p>;
@@ -84,6 +95,7 @@ export function TicTacToePage() {
   return (
     <>
       <GameHeader gameName="Tic-Tac-Toe" playerName={playerName} />
+      <ModeToggleButton mode={mode} onToggleMode={handleToggleMode} />
       <Multiplayer
         onCreateRoom={createRoom}
         initialState={{ ...DEFAULT, players: ["X"] }}
