@@ -1,4 +1,4 @@
-export function GameHeader({ difficulty }) {
+export function RpsHeader({ difficulty }) {
   return (
     <>
       <h2 id="game-heading">Game</h2>

@@ -1,4 +1,4 @@
-import { GameHeader } from "./GameHeader";
+import { RpsHeader } from "./RpsHeader";
 import { HistorySection } from "./HistorySection";
 import { beats, decideWinner, getCpuMove, nextScore } from "../../logic/rpsGame";
 import { MoveButton } from "./MoveButton";
@@ -33,7 +33,7 @@ export const GameSection = ({ difficulty }) => {
 
   return (
     <section aria-labelledby="game-heading" className="card">
-      <GameHeader difficulty={difficulty} />
+      <RpsHeader difficulty={difficulty} />
       <ScoreBoard score={score} />
       <div className="buttons">
         {moves.map((m) => (
