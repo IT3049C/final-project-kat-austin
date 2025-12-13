@@ -8,6 +8,7 @@ import LetterButtons from './LetterButtons';
 import GameStatus from './GameStatus';
 import { GameHeader } from '../GameHeader';
 import { loadSettings } from '../../logic/storage';
+import { ModeToggleButton } from '../ModeToggleButton';
 
 export default function HangmanGame() {
   const [mode, setMode] = useState('single'); 
@@ -73,12 +74,7 @@ export default function HangmanGame() {
   return (
     <>
       <GameHeader gameName='Hangman' playerName={playerName}/>
-      <div className="mode-toggle">
-        <button onClick={toggleMode}>
-          Switch to {mode === 'single' ? 'Multiplayer' : 'Single Player'}
-        </button>
-      </div>
-      
+      <ModeToggleButton mode={mode} onToggleMode={toggleMode}/>
       {mode === 'single' ? (
         <>
           <GameStatus 
