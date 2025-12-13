@@ -102,7 +102,7 @@ export default function HangmanGame() {
             onCreateRoom={handleCreateRoom}
             initialState={initializeGame()}
             roomId={roomId}
-            setRoomId={(id) => { setHookRoomId(id); setRoomId(id); }} // Sync with hook
+            onSubmitRoomId={(id) => { setHookRoomId(id); setRoomId(id); }} // Sync with hook
           />
           {roomId && gameRoomState && (
             <>

@@ -59,7 +59,7 @@ export function TicTacToePage() {
     setCurrentMove(nextHistory.length - 1);
 
     if (mode === "multi") {
-    /** @type {TicTacToeState} */
+      /** @type {TicTacToeState} */
       const gameState = {
         players: state.players,
         turn: state.turn + 1,
@@ -98,14 +98,12 @@ export function TicTacToePage() {
       <GameHeader gameName="Tic-Tac-Toe" playerName={playerName} />
       <ModeToggleButton mode={mode} onToggleMode={handleToggleMode} />
       {mode === "multi" && (
-        <>
-          <Multiplayer
-            onCreateRoom={createRoom}
-            initialState={{ ...DEFAULT, players: ["X"] }}
-            roomId={roomId}
-            setRoomId={setRoomId}
-          />
-        </>
+        <Multiplayer
+          onCreateRoom={createRoom}
+          initialState={{ ...DEFAULT, players: ["X"] }}
+          roomId={roomId}
+          onSubmitRoomId={setRoomId}
+        />
       )}
       <div className="tic-tac-toe-game">
         <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />

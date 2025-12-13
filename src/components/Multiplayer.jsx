@@ -1,4 +1,8 @@
-export function Multiplayer({ onCreateRoom, initialState, roomId, setRoomId }) {
+/**
+ * @param {object} props 
+ * @param {(roomCode: string | null) => void} props.onSubmitRoomId
+ */
+export function Multiplayer({ onCreateRoom, initialState, roomId, onSubmitRoomId }) {
   /**
    * @param {React.FormEvent<HTMLFormElement>} e
    */
@@ -9,7 +13,7 @@ export function Multiplayer({ onCreateRoom, initialState, roomId, setRoomId }) {
     const { roomCode } = Object.fromEntries(new FormData(form).entries());
     console.log("Submitted room code is: " + roomCode);
 
-    setRoomId(roomCode.toString().trim() || null);
+    onSubmitRoomId(roomCode.toString().trim() || null);
   }
 
   return (
