@@ -6,6 +6,8 @@ import HangmanBoard from './HangmanBoard';
 import WordDisplay from './WordDisplay';
 import LetterButtons from './LetterButtons';
 import GameStatus from './GameStatus';
+import { GameHeader } from '../GameHeader';
+import { loadSettings } from '../../logic/storage';
 
 export default function HangmanGame() {
   const [mode, setMode] = useState('single'); 
@@ -58,13 +60,19 @@ export default function HangmanGame() {
 
   if (!gameState && mode === 'single') return <div>Loading...</div>;
 
-  const displayWord = mode === 'single' ? getDisplayWord(gameState.word, gameState.guessedLetters) : 
-                     (gameRoomState ? getDisplayWord(gameRoomState.word, gameRoomState.guessedLetters) : null);
+  const displayWord =
+    mode === "single"
+      ? getDisplayWord(gameState.word, gameState.guessedLetters)
+      : gameRoomState
+      ? getDisplayWord(gameRoomState.word, gameRoomState.guessedLetters)
+      : null;
+
+  const settings = loadSettings();
+  const playerName = settings?.name || "Player";
 
   return (
-    <div className="hangman-game">
-      <h1>Hangman</h1>
-      
+    <>
+      <GameHeader gameName='Hangman' playerName={playerName}/>
       <div className="mode-toggle">
         <button onClick={toggleMode}>
           Switch to {mode === 'single' ? 'Multiplayer' : 'Single Player'}
@@ -73,14 +81,14 @@ export default function HangmanGame() {
       
       {mode === 'single' ? (
         <>
-          <HangmanBoard attempts={gameState.attempts} />
-          <WordDisplay word={displayWord} />
           <GameStatus 
             gameOver={gameState.gameOver}
             won={gameState.won}
             word={gameState.word}
             attempts={gameState.attempts}
           />
+          <HangmanBoard attempts={gameState.attempts} />
+          <WordDisplay word={displayWord} />
           <LetterButtons 
             guessedLetters={gameState.guessedLetters}
             onGuess={handleGuess}
@@ -102,14 +110,14 @@ export default function HangmanGame() {
           />
           {roomId && gameRoomState && (
             <>
-              <HangmanBoard attempts={gameRoomState.attempts} />
-              <WordDisplay word={displayWord} />
               <GameStatus 
                 gameOver={gameRoomState.gameOver}
                 won={gameRoomState.won}
                 word={gameRoomState.word}
                 attempts={gameRoomState.attempts}
               />
+              <HangmanBoard attempts={gameRoomState.attempts} />
+              <WordDisplay word={displayWord} />
               <LetterButtons 
                 guessedLetters={gameRoomState.guessedLetters}
                 onGuess={handleGuess}
@@ -124,6 +132,6 @@ export default function HangmanGame() {
           )}
         </>
       )}
-    </div>
+    </>
   );
 }
