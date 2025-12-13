@@ -22,7 +22,7 @@ export function HomePage() {
         <h2>Welcome to GameHub</h2>
       </header>
       <section className="player-name-section card">
-        <h2>Player Settings</h2>
+        <h3>Player Settings</h3>
         <label htmlFor="player-name">
           Your Name:
           <input
@@ -39,6 +39,11 @@ export function HomePage() {
             Current name: <strong>{playerName}</strong>
           </p>
         )}
+      </section>
+      <section className="developer-section card">
+        <h3>Developers</h3>
+        <p>Austin Schnee</p>
+        <p>Khadeeja Tunkara</p>
       </section>
     </>
   );
