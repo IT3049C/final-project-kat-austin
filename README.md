@@ -39,7 +39,7 @@ We should get **(20)** out of 20 on this assignment.
 
 - **What do you think of this completion time?**
 <!-- Answer below this line -->
-- I think we made good time. 
+- I think we made good time.
 
 - **In hindsight, what would you do differently?**
 - <!-- Answer below this line -->
@@ -47,4 +47,4 @@ We should get **(20)** out of 20 on this assignment.
 
 - **What resources did you use?**
 - <!-- Answer below this line -->
-- Github, GameRoomAPI, professors videos, and some youtube tutorials. 
+- Github, MDN, GameRoomAPI, professors videos, and some youtube tutorials.
