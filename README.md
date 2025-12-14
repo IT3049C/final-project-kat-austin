@@ -15,6 +15,10 @@ To run the project in development mode, use the command `npm run dev`. To see th
 
 Testing is conducted in this project with Playwright. To run all Playwright tests, use the command `npm test`.
 
+## Deployment
+
+Upon pushing to GitHub, the app should be automatically deployed to GitHub pages at <https://it3049c.github.io/final-project-kat-austin/>.
+
 ## Credits
 
 - [Austin Schnee](https://github.com/DragonGuyMan)
@@ -26,25 +30,23 @@ Testing is conducted in this project with Playwright. To run all Playwright test
 - [x] filled out the self-evaluation.
 
 ## Self Grading Guide
-<!--- Update the following line with your self-grade --->
-<!--- Check the Rubric on Canvas for a guideline --->
 
 We should get **(20)** out of 20 on this assignment.
 
 ## Self-Reflection
 
 - **How long it took me to finish this?**
-<!-- Answer below this line -->
--It took us a couple days of working on and off to finish. We completed the first part of the gamehub ahead of time before bringing in the multiplayer components once we went over them in class.
+
+- It took us a couple days of working on and off to finish. We completed the first part of the gamehub ahead of time before bringing in the multiplayer components once we went over them in class.
 
 - **What do you think of this completion time?**
-<!-- Answer below this line -->
+
 - I think we made good time.
 
 - **In hindsight, what would you do differently?**
-- <!-- Answer below this line -->
+
 - Nothing.
 
 - **What resources did you use?**
-- <!-- Answer below this line -->
+
 - Github, MDN, GameRoomAPI, professors videos, and some youtube tutorials.
