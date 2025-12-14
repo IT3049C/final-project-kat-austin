@@ -29,7 +29,7 @@ test.describe("Wordle", () => {
     await expect(cells).toHaveCount(LETTER_COUNT);
     // Make sure cells empty
     for (const cell of await cells.all()) {
-      expect(cell).toHaveText("");
+      await expect(cell).toHaveText("");
     }
 
     /* Testing components can be interacted with */
