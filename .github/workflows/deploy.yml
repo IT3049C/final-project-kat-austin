@@ -32,7 +32,7 @@ jobs:
 
       - name: Build App
         run: |
-          REPO_NAME="$(echo ${{ github.repository }} | cut -d'/' -f2)""
+          REPO_NAME="$(echo ${{ github.repository }} | cut -d'/' -f2)"
           npm run build -- --base="/$REPO_NAME/"
 
       - name: Create 404.html from index.html
