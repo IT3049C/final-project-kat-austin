@@ -26,7 +26,9 @@ const router = createBrowserRouter([
       { path: "/game/memory-cards", element: <MemoryCardsPage /> },
     ],
   },
-]);
+], {
+  basename: import.meta.env.BASE_URL,
+});
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
