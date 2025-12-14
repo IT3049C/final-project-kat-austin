@@ -1,8 +1,13 @@
 /**
- * @param {object} props 
+ * @param {object} props
  * @param {(roomCode: string | null) => void} props.onSubmitRoomId
  */
-export function Multiplayer({ onCreateRoom, initialState, roomId, onSubmitRoomId }) {
+export function Multiplayer({
+  onCreateRoom,
+  initialState,
+  roomId,
+  onSubmitRoomId,
+}) {
   /**
    * @param {React.FormEvent<HTMLFormElement>} e
    */
@@ -18,8 +23,12 @@ export function Multiplayer({ onCreateRoom, initialState, roomId, onSubmitRoomId
 
   return (
     <section className="card">
-      {!roomId && (
+      {!roomId ? (
         <button onClick={() => onCreateRoom(initialState)}>Create Room</button>
+      ) : (
+        <p>
+          Room Code: <code>{roomId}</code>
+        </p>
       )}
       <form onSubmit={handleSubmit}>
         <label htmlFor="room-code">
@@ -33,11 +42,6 @@ export function Multiplayer({ onCreateRoom, initialState, roomId, onSubmitRoomId
           />
         </label>
       </form>
-      {roomId && (
-        <p>
-          Room Code: <code>{roomId}</code>
-        </p>
-      )}
     </section>
   );
 }
